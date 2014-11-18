@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><?= $this->config->item('website_name').'-'.'الرئيسية'?></title>
+        <title><?= $this->config->item('website_name') . '-' . 'الرئيسية' ?></title>
         <meta name="description" content="EXCEPTION – Responsive Business HTML Template">
         <meta name="author" content="EXCEPTION">
 

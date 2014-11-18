@@ -1,12 +1,12 @@
 <?php
 error_reporting(E_ALL);
-$feedURL = 'http://gdata.youtube.com/feeds/api/users/Arabicbroker1/uploads?max-results=10';
+$feedURL = 'http://gdata.youtube.com/feeds/api/users/Arabicbroker1/uploads?max-results=5';
 $sxml = simplexml_load_file($feedURL);
 $i = 0;
 ?>
 <div class="cell-8">
-    <div  style="direction: ltr;" class="fx" data-animate="fadeInLeft">
-        <h3 class="block-head"  style="padding-bottom: 8px;padding-top: 6px;direction: rtl;">مكتبة الفيديو</h3>
+    <div  style="direction: ltr;overflow:hidden;overflow-y:hidden;" data-animate="fadeInLeft">
+        <h3 class="block-head"  style="padding-bottom: 8px;padding-top: 6px;direction: rtl;overflow:hidden;overflow-y:hidden;">مكتبة الفيديو</h3>
         <ul class="bxslider" style="padding-top: 11px;">
             <?php
             foreach ($sxml->entry as $entry) {
@@ -17,7 +17,7 @@ $i = 0;
                 ?>
 
                 <li>
-                    <iframe width="560" height="315" src="//www.youtube.com/embed/<?= $watch; ?>" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="//www.youtube.com/embed/<?= $watch; ?>" frameborder="0"></iframe>
                 </li>
 
                 <?php

@@ -2,8 +2,8 @@
 session_start();
 require_once("twitteroauth/twitteroauth.php"); //Path to twitteroauth library
  
-$twitteruser = "arabicbroker1";
-$notweets = 30;
+$twitteruser = "GoldenTrader_Fx";
+$notweets = 5;
 $consumerkey = "N9Sl8Uq9caanKlvnEZBSIWLpW";
 $consumersecret = "JUS4jMeDPJsEmPXchYKI4zh583RQo31swpSV4ANDQ8riIDYbme";
 $accesstoken = "2824230753-sAOfq7PUvM8uoIKDV96vnrPAExFjXZ4EQRhxbYu";

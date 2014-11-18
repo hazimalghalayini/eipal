@@ -10,17 +10,17 @@ class News_model extends CI_Model {
         $query = $this->db->insert('news', $data);
         return $query;
     }
-    
+
     function add_agenda($data) {
         $query = $this->db->insert('agenda', $data);
         return $query;
     }
-    
+
     function get_agenda_count($data = NULL) {
         !empty($data['i_search']) ? $this->db->like('news_description', $data['i_search']) : '';
         return $this->db->count_all_results('agenda');
     }
-    
+
     //for front_end
     function all_agenda($limit, $start) {
         $this->db->order_by('publish_date', 'DESC');
@@ -29,7 +29,7 @@ class News_model extends CI_Model {
 
         return $query->result_array();
     }
-    
+
     function get_all_agenda($data) {
         $this->db->limit($data['i_end_index'], $data['i_start_index']);
         !empty($data['i_search']) ? $this->db->like('news_description', $data['i_search']) : '';
@@ -38,7 +38,7 @@ class News_model extends CI_Model {
 
         return $query->result_array();
     }
-    
+
     function get_agenda_info($news_id) {
         $this->db->select('*');
         $this->db->where('news_id', $news_id);
@@ -46,13 +46,13 @@ class News_model extends CI_Model {
 
         return $query->row_array();
     }
-    
+
     function update_agenda_info($news_id, $data) {
         $this->db->where('news_id', $news_id);
         $query = $this->db->update('agenda', $data);
         return $query;
     }
-    
+
     function delete_agenda($news_id) {
         $this->db->where('news_id', $news_id);
         $query = $this->db->delete('agenda');
@@ -82,7 +82,7 @@ class News_model extends CI_Model {
         $this->db->select('news.* , count(comments.comment_id) as comments_count, news_categories.category_name');
         $this->db->join('comments', 'comments.news_id=news.news_id', 'left');
         $this->db->join('news_categories', 'news.category_id = news_categories.category_id', 'left');
-        $query = $this->db->get_where('news', array('news.news_id' => $news_id));
+        $query = $this->db->get_where('news', array('news.news_id' => $news_id, 'comments.status' => 1));
         return $query->row_array();
     }
 
@@ -229,7 +229,7 @@ class News_model extends CI_Model {
         $this->db->select('name, comment, publishDate,news_id');
         $this->db->order_by('publishDate');
         $query = $this->db->get_where('comments', array('status' => 1));
-        
+
         return $query->result();
     }
 

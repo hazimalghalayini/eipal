@@ -1,7 +1,7 @@
 //JQuery Twitter Feed. Coded by Tom Elliott @ www.webdevdoor.com (2013) based on https://twitter.com/javascripts/blogger.js
 //Requires JSON output from authenticating script: http://www.webdevdoor.com/php/authenticating-twitter-feed-timeline-oauth/
 
-$(document).ready(function() {
+$(document).ready(function () {
     var displaylimit = 10;
     var twitterprofile = "";
     var screenname = "";
@@ -19,8 +19,8 @@ $(document).ready(function() {
 
     $('#twitter-feed').html(headerHTML + loadingHTML);
 
-    $.getJSON('../assets/front_end/php/get-tweets.php',
-            function(feeds) {
+    $.getJSON(window.location.origin + '/eipal/assets/front_end/php/get-tweets.php',
+            function (feeds) {
                 //alert(feeds);
                 var feedHTML = '';
                 var displayCounter = 1;
@@ -85,18 +85,18 @@ $(document).ready(function() {
 
                 //Add twitter action animation and rollovers
                 if (showtweetactions == true) {
-                    $('.twitter-article').hover(function() {
+                    $('.twitter-article').hover(function () {
                         $(this).find('#twitter-actions').css({'display': 'block', 'opacity': 0, 'margin-top': -20});
                         $(this).find('#twitter-actions').animate({'opacity': 1, 'margin-top': 0}, 200);
-                    }, function() {
-                        $(this).find('#twitter-actions').animate({'opacity': 0, 'margin-top': -20}, 120, function() {
+                    }, function () {
+                        $(this).find('#twitter-actions').animate({'opacity': 0, 'margin-top': -20}, 120, function () {
                             $(this).css('display', 'none');
                         });
                     });
 
                     //Add new window for action clicks
 
-                    $('#twitter-actions a').click(function() {
+                    $('#twitter-actions a').click(function () {
                         var url = $(this).attr('href');
                         window.open(url, 'tweet action window', 'width=580,height=500');
                         return false;
@@ -121,8 +121,8 @@ $(document).ready(function() {
 
                         $('#tw' + animatetweet).css({'display': 'block'});
                         $('#tw' + animatetweet).css('margin-top', -fadeoffsetin);
-                        $('#tw' + animatetweet).animate({'opacity': 1, 'margin-top': 0}, tweetfadetime, function() {
-                            $('#tw' + animatetweet).delay(tweetdelaytime).animate({'opacity': 0, 'margin-top': fadeoffsetout}, tweetfadetime, function() {
+                        $('#tw' + animatetweet).animate({'opacity': 1, 'margin-top': 0}, tweetfadetime, function () {
+                            $('#tw' + animatetweet).delay(tweetdelaytime).animate({'opacity': 0, 'margin-top': fadeoffsetout}, tweetfadetime, function () {
                                 $('#tw' + animatetweet).css({'display': 'none', 'margin-top': 0});
                                 if (animatetweet < displayCounter - 2 + starttweet) {
                                     animatetweet++;
@@ -137,7 +137,7 @@ $(document).ready(function() {
 
                 animatetweets();
 
-            }).error(function(jqXHR, textStatus, errorThrown) {
+            }).error(function (jqXHR, textStatus, errorThrown) {
         var error = "";
         if (jqXHR.status === 0) {
             error = 'Connection problem. Check file path and www vs non-www in getJSON request';
@@ -161,16 +161,16 @@ $(document).ready(function() {
     //Function modified from Stack Overflow
     function addlinks(data) {
         //Add link to all http:// links within tweets
-        data = data.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url) {
+        data = data.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function (url) {
             return '<a href="' + url + '" >' + url + '</a>';
         });
 
         //Add link to @usernames used within tweets
-        data = data.replace(/\B@([_a-z0-9]+)/ig, function(reply) {
+        data = data.replace(/\B@([_a-z0-9]+)/ig, function (reply) {
             return '<a href="http://twitter.com/' + reply.substring(1) + '" style="font-weight:lighter;" target="_blank">' + reply.charAt(0) + reply.substring(1) + '</a>';
         });
         //Add link to #hastags used within tweets
-        data = data.replace(/\B#([_a-z0-9]+)/ig, function(reply) {
+        data = data.replace(/\B#([_a-z0-9]+)/ig, function (reply) {
             return '<a href="https://twitter.com/search?q=' + reply.substring(1) + '" style="font-weight:lighter;" target="_blank">' + reply.charAt(0) + reply.substring(1) + '</a>';
         });
         return data;
